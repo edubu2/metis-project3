@@ -10,7 +10,7 @@ Project description [here](https://github.com/thisismetis/onl_ds5/blob/main/curr
 
 ## Project Ideas
 
-    - Predicting whether or not customer will purchase an item in their cart, or not.
-      - data source: 2017 Instacart dataset (via [kaggle](https://www.kaggle.com/psparks/instacart-market-basket-analysis))
+1. Predicting whether or not customer will purchase an item in their cart, or not.
+    - Data source: 2017 Instacart dataset (via [kaggle](https://www.kaggle.com/psparks/instacart-market-basket-analysis))
 
 
