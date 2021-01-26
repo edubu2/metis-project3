@@ -35,6 +35,7 @@ ___
 2. Ensure all technologies in the [Tech Stack](#tech-stack) are installed on your machine
 3. From your terminal (located in the root directory of the repo), use the `psql -f code/db_create.sql` command to create and populate the 'instacart' database on your machine.
 4. Create a `code/database.ini` file containing your PostgreSQL username and password. Make sure this filename remains in the .gitignore file to keep this information hidden from the public. Here's what it should look like (replace 'username' and 'password' with your Postgres username & password).
+
     ![db_setup_file.png](etc/db_setup_file.png)
 ___
 ## Data Source
