@@ -2,3 +2,4 @@
 __pycache__/
 data/
 code/database.ini
+code/.ipynb_checkpoints/
