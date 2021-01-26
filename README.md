@@ -25,11 +25,11 @@ ___
 
 This model has two use-cases for Instacart:
 
-1.  "Buy it again" recommendations in the application
+1.  **"Buy it again" recommendations in the application**
 
     ![Buy it Again](etc/buy_again.png)
 
-2.  "Frequently bought with..." recommendations while shopping for certain products
+2.  **"Frequently bought with..." recommendations while shopping for certain products**
 
     ![Frequently bought with](etc/freq_bought_with.png)
 
