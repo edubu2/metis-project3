@@ -20,6 +20,8 @@ Project instructions (Metis students only) [here](https://github.com/thisismetis
 
 Download the dataset [here](https://www.kaggle.com/c/instacart-market-basket-analysis/data).
 
+Data dictionary [here](https://gist.github.com/jeremystan/c3b39d947d9b88b3ccff3147dbcf6c6b).
+
 ___
 ## Applications
 
