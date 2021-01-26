@@ -4,9 +4,9 @@
 
 ## Objective
 
-**Predicting whether an InstaCart customer will purchase an item again in the future using Logistic Regression**
+### Predicting whether an InstaCart customer will purchase an item again in the future using Logistic Regression
 
-By Elliot Wilens, Metis Data Scientist
+**By Elliot Wilens, Metis Data Scientist**
 
 Timeline: 2 weeks
 
@@ -50,7 +50,7 @@ ___
 1. Fork & clone this repository to your local Github repo/machine
 2. Ensure all technologies in the [Tech Stack](#tech-stack) section are installed on your machine
 3. From your terminal (located in the root directory of the repo), use the `psql -f code/db_create.sql` command to create and populate the 'instacart' database on your machine.
-4. Create a `code/database.ini` file containing your PostgreSQL username and password. Make sure this filename remains in the .gitignore file to keep this information hidden from the public. Here's what it should look like (replace 'username' and 'password' with your Postgres username & password).
+4. Create a `code/database.ini` file containing your Postgres username and password. Make sure this filename remains in the .gitignore file to keep this information hidden from the public. Here's what it should look like (replace 'username' and 'password' with your Postgres username & password).
 
     ![db_setup_file.png](etc/db_setup_file.png)
 ___
@@ -58,5 +58,4 @@ ___
 
 **Kaggle Competition (2018): [Instacart Market Basket Analysis](https://www.kaggle.com/c/instacart-market-basket-analysis/data)**
 
-Data originally sourced from 
-“The Instacart Online Grocery Shopping Dataset 2017”, Accessed by Kaggle from [instacart.com](https://www.instacart.com/datasets/grocery-shopping-2017)
+Data originally sourced from “The Instacart Online Grocery Shopping Dataset 2017”, Accessed by Kaggle from [instacart.com](https://www.instacart.com/datasets/grocery-shopping-2017)
