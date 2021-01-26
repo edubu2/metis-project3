@@ -1,10 +1,14 @@
 # Metis Data Science Bootcamp | Project 3 | Classification
 
-## Predict whether a customer will purchase the item(s) in their cart using Logistic Regression techniques
+## Objective
+
+**Predicting whether an InstaCart customer will purchase an item again in the future using Logistic Regression**
 
 Timeline: 2 weeks
 
 Project description (Metis students only) [here](https://github.com/thisismetis/onl_ds5/blob/main/curriculum/project-03/project-03-introduction/project_03.md)
+
+Dataset can be downloaded [here](https://www.kaggle.com/c/instacart-market-basket-analysis/data)
 
 (in progress)
 
