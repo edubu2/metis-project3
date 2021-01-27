@@ -2,7 +2,7 @@
 
 (in progress)
 
-testing VM push (hi Rachel)
+
 ## Objective
 
 ### Predicting whether an Instacart customer will purchase an item again in the future using Logistic Regression
@@ -47,6 +47,10 @@ ___
     - StatsModels
     - pandas & numpy
     - matplotlib & seaborn
+
+- Algorithms:
+	- XGBoost
+	- Logistic Regression
 
 ___
 ## Steps to Reproduce Locally
