@@ -2,6 +2,8 @@
 
 (in progress)
 
+testing VM push
+
 ## Objective
 
 ### Predicting whether an Instacart customer will purchase an item again in the future using Logistic Regression
