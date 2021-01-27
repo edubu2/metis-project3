@@ -51,7 +51,7 @@ ___
 - Algorithms:
 	- XGBoost
 	- Logistic Regression
-	- ROC/ AOC (to compare algorithms and positive thresholds)
+	- ROC/ AOC (to compare algorithms and probability thresholds)
 ___
 ## Steps to Reproduce Locally
 1. Fork & clone this repository to your local Github repo/machine
