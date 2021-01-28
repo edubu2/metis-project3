@@ -16,10 +16,11 @@ def save_dfs(conn):
     """
     Takes: pyscopg2 connect instance to 'instacart' psql database
 
-    Returns: Three dataFrames (tuple):
+    Returns: four dataFrames (tuple):
         1. df_orders
         2. df_train
         3. df_prior
+        4. df_prod (products)
     """
     c = conn.cursor()
 
@@ -65,13 +66,18 @@ def save_dfs(conn):
 
     df_prior = pd.read_sql_query(q, conn)
 
-    return df_orders, df_train, df_prior
+    # create df_prior
+
+    q = "SELECT * FROM products"
+    df_prod = pd.read_sql_query(q, conn)
+
+    return df_orders, df_train, df_prior, df_prod
 
 
 def get_dfs():
     conn = establish_conn()
-    df_orders, df_train, df_prior = save_dfs(conn)
-    return df_orders, df_train, df_prior
+    df_orders, df_train, df_prior, df_prod = save_dfs(conn)
+    return df_orders, df_train, df_prior, df_prod
 
 
 if __name__ == "__main__":
