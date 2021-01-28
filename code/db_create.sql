@@ -55,4 +55,12 @@ CREATE TABLE products(
 \copy train_orders FROM 'data/order_products__train.csv' DELIMITER ',' CSV HEADER;
 \copy prior_orders FROM 'data/order_products__prior.csv' DELIMITER ',' CSV HEADER;
 
+CREATE TABLE product_detail AS 
+    SELECT * FROM departments
+    RIGHT JOIN (
+        SELECT * FROM products
+        LEFT JOIN aisles
+        ON products.aisle_id = aisles.aisle_id
+    ) AS prod_detail
+    ON prod_detail.department_id = departments.department_id;
 
