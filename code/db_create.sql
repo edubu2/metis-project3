@@ -56,7 +56,7 @@ CREATE TABLE products(
 \copy prior_orders FROM 'data/order_products__prior.csv' DELIMITER ',' CSV HEADER;
 
 CREATE TABLE product_detail AS 
-    SELECT * FROM departments
+    SELECT department FROM departments
     RIGHT JOIN (
         SELECT * FROM products
         LEFT JOIN aisles
