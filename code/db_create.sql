@@ -2,7 +2,7 @@
 /* SCRIPT MUST BE RUN FROM JUST OUTSIDE THE 'data/' DIRECTORY */
 /* ALL .csv FILES MUST BE STORED IN THE 'data/' DIRECTORY */
 
-
+-- Define tables in db
 CREATE DATABASE instacart;
 
 \connect instacart;
@@ -48,6 +48,7 @@ CREATE TABLE products(
     department_id INT NOT NULL
 );
 
+-- bring in Instacart data
 \copy aisles FROM 'data/aisles.csv' DELIMITER ',' CSV HEADER;
 \copy departments FROM 'data/departments.csv' DELIMITER ',' CSV HEADER;
 \copy orders FROM 'data/orders.csv' DELIMITER ',' CSV HEADER;
@@ -55,12 +56,19 @@ CREATE TABLE products(
 \copy train_orders FROM 'data/order_products__train.csv' DELIMITER ',' CSV HEADER;
 \copy prior_orders FROM 'data/order_products__prior.csv' DELIMITER ',' CSV HEADER;
 
+-- custom tables
 CREATE TABLE product_detail AS 
-    SELECT department FROM departments
+    SELECT products.product_id, products.aisle_id, departments.department_idf,
+        products.product_name, aisles.aisle, departments.department
+    FROM departments
     RIGHT JOIN (
         SELECT * FROM products
         LEFT JOIN aisles
         ON products.aisle_id = aisles.aisle_id
     ) AS prod_detail
     ON prod_detail.department_id = departments.department_id;
+
+
+
+
 
