@@ -89,6 +89,8 @@ def create_dfs():
         df_prod_detail = get_prod_detail(conn)
         return df_orders, df_train, df_prior, df_prod_detail
 
+    main()
+
 
 if __name__ == "__main__":
     create_dfs()
