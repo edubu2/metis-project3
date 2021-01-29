@@ -77,7 +77,7 @@ def create_dfs():
     def get_prod_detail(conn):
         """Creates df_prod. """
 
-        q = "SELECT product_id, product_name, aisle_id, products.department_id, dep FROM products"
+        q = "SELECT product_id, product_name, aisle_id, products.department_id, department FROM products"
         df_prod = pd.read_sql_query(q, conn)
         return df_prod
 
