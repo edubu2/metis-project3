@@ -12,7 +12,7 @@ def establish_conn():
     return conn
 
 
-def save_dfs(conn):
+def create_dfs(conn):
     """
     Takes: pyscopg2 connect instance to 'instacart' psql database
 
@@ -92,11 +92,5 @@ def save_dfs(conn):
         return df_orders, df_train, df_prior, df_prod_detail
 
 
-def get_dfs():
-    conn = establish_conn()
-    df_orders, df_train, df_prior, df_prod_detail = save_dfs(conn)
-    return df_orders, df_train, df_prior, df_prod_detail
-
-
 if __name__ == "__main__":
-    get_dfs()
+    create_dfs()
