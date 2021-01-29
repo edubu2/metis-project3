@@ -24,7 +24,7 @@ def save_dfs(conn):
     """
     c = conn.cursor()
 
-    def query_orders(conn):
+    def get_orders(conn):
         """ Creates df_orders. """
 
         query = """
@@ -84,9 +84,12 @@ def save_dfs(conn):
         return df_prod
 
     def main():
-        
 
-    return df_orders, df_train, df_prior, df_prod_detail
+        df_orders = get_orders(conn)
+        df_train = get_train(conn)
+        df_prior = get_prior(conn)
+        df_prod_detail = get_prod_detail(conn)
+        return df_orders, df_train, df_prior, df_prod_detail
 
 
 def get_dfs():
