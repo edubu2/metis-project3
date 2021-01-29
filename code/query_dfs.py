@@ -32,7 +32,7 @@ def create_dfs():
 
         df_orders = pd.read_sql_query(query, conn)
 
-        return query_orders
+        return df_orders
 
     def get_train(conn):
         """ Creates df_train. """
