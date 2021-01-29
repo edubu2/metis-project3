@@ -15,7 +15,6 @@ def create_dfs():
         3. df_prior
         4. df_prod (products)
     """
-    c = conn.cursor()
 
     def establish_conn():
         params = get_db_params()
