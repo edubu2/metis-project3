@@ -93,4 +93,5 @@ def create_dfs(conn):
 
 
 if __name__ == "__main__":
-    create_dfs()
+    conn = establish_conn()
+    create_dfs(conn)
