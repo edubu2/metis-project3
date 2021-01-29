@@ -93,5 +93,4 @@ def create_dfs():
 
 
 if __name__ == "__main__":
-    df_orders, df_train, df_prior, df_prod_detail = create_dfs()
-    return df_orders, df_train, df_prior, df_prod_detail
+    create_dfs()
