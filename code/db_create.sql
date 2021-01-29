@@ -62,7 +62,9 @@ CREATE TABLE product_detail AS
         prod_detail.product_name, prod_detail.aisle, departments.department
     FROM departments
     RIGHT JOIN (
-        SELECT * FROM products
+        SELECT products.product_id, aisles.aisle_id, products.product_name, products.department_id,
+            aisles.aisle
+        FROM products
         LEFT JOIN aisles
         ON products.aisle_id = aisles.aisle_id
     ) AS prod_detail
