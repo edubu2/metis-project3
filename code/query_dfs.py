@@ -5,14 +5,7 @@ import psycopg2
 from db_config import get_db_params
 
 
-def establish_conn():
-    params = get_db_params()
-    conn = psycopg2.connect(**params)
-
-    return conn
-
-
-def create_dfs(conn):
+def create_dfs():
     """
     Takes: pyscopg2 connect instance to 'instacart' psql database
 
@@ -23,6 +16,12 @@ def create_dfs(conn):
         4. df_prod (products)
     """
     c = conn.cursor()
+
+    def establish_conn():
+        params = get_db_params()
+        conn = psycopg2.connect(**params)
+
+        return conn
 
     def get_orders(conn):
         """ Creates df_orders. """
@@ -84,7 +83,7 @@ def create_dfs(conn):
         return df_prod
 
     def main():
-
+        conn = establish_conn()
         df_orders = get_orders(conn)
         df_train = get_train(conn)
         df_prior = get_prior(conn)
@@ -93,5 +92,4 @@ def create_dfs(conn):
 
 
 if __name__ == "__main__":
-    conn = establish_conn()
-    create_dfs(conn)
+    create_dfs()
