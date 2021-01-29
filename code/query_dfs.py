@@ -87,9 +87,11 @@ def create_dfs():
         df_train = get_train(conn)
         df_prior = get_prior(conn)
         df_prod_detail = get_prod_detail(conn)
+
         return df_orders, df_train, df_prior, df_prod_detail
 
-    main()
+    df_orders, df_train, df_prior, df_prod_detail = main()
+    return df_orders, df_train, df_prior, df_prod_detail
 
 
 if __name__ == "__main__":
