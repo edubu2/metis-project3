@@ -58,7 +58,7 @@ CREATE TABLE products(
 
 -- custom tables
 CREATE TABLE product_detail AS 
-    SELECT prod_detail.product_id, prod_detail.aisle_id, departments.department_idf,
+    SELECT prod_detail.product_id, prod_detail.aisle_id, departments.department_id,
         prod_detail.product_name, prod_detail.aisle, departments.department
     FROM departments
     RIGHT JOIN (
