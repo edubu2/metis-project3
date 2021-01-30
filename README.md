@@ -5,7 +5,7 @@
 
 ## Objective
 
-### Predicting whether an Instacart customer will purchase an item again in the future using Logistic Regression
+### Predicting whether an Instacart customer will purchase an item again in their next order using Logistic Regression
 
 **By Elliot Wilens, Metis Data Scientist**
 
@@ -61,7 +61,8 @@ ___
 1. Fork & clone this repository to your local Github repo/machine
 2. Ensure all technologies in the [Tech Stack](#tech-stack) section are installed on your machine
 3. From your terminal (located in the root directory of the repo), use the `psql -f code/db_create.sql` command to create and populate the 'instacart' database on your machine.
-4. Create a `code/database.ini` file containing your Postgres username and password. Make sure this filename remains in the .gitignore file to keep this information hidden from the public. Here's what it should look like (replace 'username' and 'password' with your Postgres username & password).
+4. Create an empty directory named `pickle` within the `metis-project3/code/` directory.
+5. Create a `code/database.ini` file containing your Postgres username and password. Make sure this filename remains in the .gitignore file to keep this information hidden from the public. Here's what it should look like (replace 'username' and 'password' with your Postgres username & password).
 
     ![db_setup_file.png](etc/db_setup_file.png)
 ___
