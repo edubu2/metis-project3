@@ -39,12 +39,16 @@ This model has two use-cases for Instacart:
 ___
 ## Tech Stack
 
+- Google Cloud Platform VM (Serving Jupyter Notebook & Database in compute engine)
+  - not required for local reproduction
+- FileZilla (to move files too large for Git to/from GCP VM)
 - PostgreSQL
 - Python3 Libraries:
     - SQLAlchemy & psycopg2
     - scipy
     - scikit-learn
     - StatsModels
+    - pickle
     - pandas & numpy
     - matplotlib & seaborn
 
