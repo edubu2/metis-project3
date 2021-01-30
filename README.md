@@ -5,7 +5,7 @@
 
 ## Objective
 
-### Predicting whether an Instacart customer will purchase an item again in the future using Logistic Regression
+### Predicting whether an Instacart customer will purchase an item again in their next order using Logistic Regression
 
 **By Elliot Wilens, Metis Data Scientist**
 
