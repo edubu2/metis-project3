@@ -78,7 +78,7 @@ def create_dfs():
         """Creates df_prod. """
 
         q = "SELECT * FROM product_detail"
-        df_prod = pd.read_sql_query(q, conn)
+        df_prod = pd.read_sql_query(q, conn, index_col="product_id")
         return df_prod
 
     def main():
