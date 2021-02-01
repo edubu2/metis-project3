@@ -28,6 +28,3 @@ def split_users(df, test_size=0.2, seed=36):
 
     return X_tr, X_te, y_tr, y_te
 
-
-if __name__ == "__main__":
-    split_users()
