@@ -2,6 +2,8 @@ from collections import OrderedDict
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import f1_score
+import pandas as pd
+import numpy as np
 
 
 def split_users(df, test_size=0.2, seed=36):
