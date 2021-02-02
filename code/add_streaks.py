@@ -1,6 +1,3 @@
-"""
-@author: Faron
-"""
 import numpy as np
 import pandas as pd
 from joblib import Parallel, delayed
@@ -10,19 +7,26 @@ from datetime import datetime
 """
 Calculates (user, product) order_streak for the last n orders.
 
-- abs(order_streak) is length of streak
-- sgn(order_streak) encodes type of streak (non-ordered vs ordered)
+- positive streaks: user has ordered this product in x consecutive orders.
+- negative streaks: user has NOT ordered this product in x consecutive orders.
+
+Returns: Nothing. Saves the 'order_streaks.csv' file in the '../data/' directory.
 """
 
-DATA_DIR = "../data/"
-PRIOR_FILE = "order_products__prior"
-ORDERS_FILE = "orders"
+PRIOR_FP = "../data/order_products__prior.csv"
+ORDERS_FP = "../data/orders.csv"
+OUT_FP = "../data/order_streaks_2.csv"
 
 
 def load_input_data():
-    PATH = "{}{}{}".format(DATA_DIR, PRIOR_FILE, ".csv")
-    prior = pd.read_csv(
-        PATH,
+    """
+        Loads CSV files into dtype-optimized DataFrames.
+
+        Returns: df_prior, df_orders.
+    """
+
+    df_prior = pd.read_csv(
+        PRIOR_FP,
         dtype={
             "order_id": np.int32,
             "product_id": np.uint16,
@@ -31,9 +35,8 @@ def load_input_data():
         },
     )
 
-    PATH = "{}{}{}".format(DATA_DIR, ORDERS_FILE, ".csv")
-    orders = pd.read_csv(
-        PATH,
+    df_orders = pd.read_csv(
+        ORDERS_FP,
         dtype={
             "order_id": np.int32,
             "user_id": np.int64,
@@ -43,13 +46,13 @@ def load_input_data():
             "days_since_prior_order": np.float32,
         },
     )
-    return prior, orders
+    return df_prior, df_orders
 
 
 def apply_parallel(df_groups, _func):
     nthreads = multiprocessing.cpu_count() >> 1
-    print("nthreads: {}".format(nthreads))
-
+    print(f"num threads used for multiprocessing: {nthreads}")
+    # process each group object on
     res = Parallel(n_jobs=nthreads)(delayed(_func)(grp.copy()) for _, grp in df_groups)
     return pd.concat(res)
 
@@ -58,36 +61,31 @@ def add_order_streak(df):
     tmp = df.copy()
     tmp.user_id = 1
 
-    UP = tmp.pivot(index="product_id", columns="order_number").fillna(-1)
-    UP.columns = UP.columns.droplevel(0)
+    user_prod = tmp.pivot(index="product_id", columns="order_number").fillna(-1)
+    user_prod.columns = user_prod.columns.droplevel(0)
 
-    x = np.abs(UP.diff(axis=1).fillna(2)).values[:, ::-1]
+    x = np.abs(user_prod.diff(axis=1).fillna(2)).values[:, ::-1]
     df.set_index("product_id", inplace=True)
-    df["order_streak"] = np.multiply(np.argmax(x, axis=1) + 1, UP.iloc[:, -1])
+    df["order_streak"] = np.multiply(np.argmax(x, axis=1) + 1, user_prod.iloc[:, -1])
     df.reset_index(drop=False, inplace=True)
     return df
 
 
-if __name__ == "__main__":
-    prior, orders = load_input_data()
+def main():
+    df_prior, df_orders = load_input_data()
 
-    print("orders: {}".format(orders.shape))
-    print("take only recent 5 orders per user:")
-    orders = orders.groupby(["user_id"]).tail(5 + 1)
-    print("orders: {}".format(orders.shape))
+    # get the last 6 orders for each user (counting df_prior streak up to 5, but df_orders contains 1 train order)
+    df_orders = df_orders.groupby(["user_id"]).tail(6)
 
-    prior = orders.merge(prior, how="inner", on="order_id")
-    prior = prior[["user_id", "product_id", "order_number"]]
-    print("prior: {}".format(prior.shape))
-
-    user_groups = prior.groupby("user_id")
-    s = datetime.now()
+    df_prior = df_orders.merge(df_prior, on="order_id")
+    streak_cols = ["user_id", "product_id", "order_number"]
+    user_groups = df_prior[streak_cols].groupby("user_id")
     df = apply_parallel(user_groups, add_order_streak)
-    e = datetime.now()
-    print("time elapsed: {}".format(e - s))
 
-    df = df.drop("order_number", axis=1).drop_duplicates().reset_index(drop=True)
-    df = df[["user_id", "product_id", "order_streak"]]
-    print(df.head(n=10))
-    df.to_csv("data/order_streaks.csv", index=False)
-    print("data/order_streaks.csv has been written")
+    df = df.drop(columns="order_number").drop_duplicates().reset_index(drop=True)
+    final_cols = ["user_id", "product_id", "order_streak"]
+    df[final_cols].to_csv(OUT_FP, index=False)
+
+
+if __name__ == "__main__":
+    main()
