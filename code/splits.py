@@ -6,12 +6,19 @@ import pandas as pd
 import numpy as np
 
 
-def split_users(df, test_size=0.2, seed=36):
+def split_users(df, subset=False, test_size=0.2, seed=36):
 
     rs = np.random.RandomState(seed)
 
-    # Here, we select a sample (`choice`) from all possible unique users
     total_users = df["user_id"].unique()
+
+    if subset:
+        assert (
+            0 < subset < 1
+        ), "Subset must be a float between 0.00 and 0.99. Otherwise, subset=False"
+        cutoff = len(total_users) * subset
+        total_users = total_users[:cutoff]
+
     test_users = rs.choice(
         total_users, size=int(total_users.shape[0] * test_size), replace=False
     )
