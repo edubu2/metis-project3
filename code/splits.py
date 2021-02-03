@@ -31,7 +31,9 @@ def split_users(df, subset=False, test_size=0.2, seed=36):
     X_tr = df_tr.drop(["product_id", "user_id", "cart", "in_cart", "last_cart"], axis=1)
     X_te = df_te.drop(["product_id", "user_id", "cart", "in_cart", "last_cart"], axis=1)
 
-    print(f"Actual Test Size: {y_te.shape[0] / total_users.shape[0]:0.4}")
+    print(
+        f"Actual Test Size (not accounting for subset): {y_te.shape[0] / df.shape[0]:0.4}"
+    )
 
     return X_tr, X_te, y_tr, y_te
 
