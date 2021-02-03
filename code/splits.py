@@ -16,7 +16,7 @@ def split_users(df, subset=False, test_size=0.2, seed=36):
         assert (
             0 < subset < 1
         ), "Subset must be a float between 0.00 and 0.99. Otherwise, subset=False"
-        cutoff = len(total_users) * subset
+        cutoff = round(len(total_users) * subset)
         total_users = total_users[:cutoff]
 
     test_users = rs.choice(
