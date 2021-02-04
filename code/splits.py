@@ -35,7 +35,7 @@ def split_users(df, subset=False, test_size=0.2, seed=54):
     print(
         f"""
     X_train sample size: {len(X_tr)}
-    X_train sample size: {len(X_te)}"""
+    X_test sample size: {len(X_te)}"""
     )
 
     return X_tr, X_te, y_tr, y_te
