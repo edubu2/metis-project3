@@ -10,22 +10,22 @@ def split_users(df, subset=False, test_size=0.2, seed=54):
 
     rs = np.random.RandomState(seed)
 
-    total_users = df["user_id"].unique()
+    sample_users = df["user_id"].unique()
 
     if subset:
         assert (
             0 < subset < 1
         ), "Subset must be a float between 0.00 and 0.99. Otherwise, subset=False"
-        cutoff = round(len(total_users) * subset)
-        total_users = total_users[:cutoff]
+        cutoff = round(len(sample_users) * subset)
+        sample_users = sample_users[:cutoff]
 
-    else:
-        test_users = rs.choice(
-            total_users, size=int(total_users.shape[0] * test_size), replace=False
-        )
+    test_users = rs.choice(
+        sample_users, size=int(sample_users.shape[0] * test_size), replace=False
+    )
 
-    mask = df["user_id"].isin(test_users)
-    df_tr = df[~mask]  # the '~' means NOT (i.e. includes Bool=False)
+    mask = (~df["user_id"].isin(test_users)) & (df["user_id"].isin(sample_users))
+    df_tr = df[mask]  # the '~' means NOT (i.e. includes Bool=False)
+    mask = (df["user_id"].isin(test_users)) & (df["user_id"].isin(sample_users))
     df_te = df[mask]
 
     y_tr, y_te = df_tr["in_cart"], df_te["in_cart"]
