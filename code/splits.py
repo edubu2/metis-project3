@@ -6,7 +6,7 @@ import pandas as pd
 import numpy as np
 
 
-def split_users(df, subset=False, test_size=0.2, seed=36):
+def split_users(df, subset=False, test_size=0.2, seed=54):
 
     rs = np.random.RandomState(seed)
 
@@ -19,9 +19,10 @@ def split_users(df, subset=False, test_size=0.2, seed=36):
         cutoff = round(len(total_users) * subset)
         total_users = total_users[:cutoff]
 
-    test_users = rs.choice(
-        total_users, size=int(total_users.shape[0] * test_size), replace=False
-    )
+    else:
+        test_users = rs.choice(
+            total_users, size=int(total_users.shape[0] * test_size), replace=False
+        )
 
     mask = df["user_id"].isin(test_users)
     df_tr = df[~mask]  # the '~' means NOT (i.e. includes Bool=False)
