@@ -5,9 +5,9 @@ import psycopg2
 from db_config import get_db_params
 
 
-def create_dfs():
+def create_dfs(subset=False):
     """
-    Takes: pyscopg2 connect instance to 'instacart' psql database
+    Takes: subset (int, optional, default False): num_users from 1000
 
     Returns: four dataFrames (tuple):
         1. df_orders
