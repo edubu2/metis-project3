@@ -156,7 +156,6 @@ What does that mean for us, with our goal being number 2? What products should I
 The clear winner is the latter option, to optimize recall. However, the Kaggle competition ranked winners based on their model F-1 scores. F-1 scores perfectly balance precision with recall.
 
 Therefore, here is where we diverge from the Kaggle competition (and hopefully Instacart does the same). We will use an F-beta scoring metric with beta=2. This F-2 score still balances precision and recall, but essentially weights recall 25% higher in the calculation.
-
 ![etc/pr_good_curve.png](https://github.com/edubu2/metis-project3/blob/main/etc/pr_good_curve.png)
 
 We also need to set a probability threshold. If our model were a person, this would be the amount of convincing they would need to classify something as a reorder. With a 50% threshold, if the model predicts a 40% probability, it will not be shown to the user. 
@@ -164,7 +163,6 @@ We also need to set a probability threshold. If our model were a person, this wo
 So, I tested the results at each threshold to determine that a threshold of 0.12 results in the highest F-2 score. With this, we have our prediction model, and the results are as follows:
 
 **F-2 Score: `0.532034`**
-
 ![Confusion Matrix](https://github.com/edubu2/metis-project3/blob/main/etc/cm_optimal_f2_readme.png)
 ___
 ## Data Source
