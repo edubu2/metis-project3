@@ -1,8 +1,5 @@
 # Metis Data Science Bootcamp | Project 3 | Classification
 
-(in progress)
-
-
 ## Objective
 
 ### Identifying which items should be highlighted to the user in Instacart's 'Buy it Again' feature
@@ -17,8 +14,6 @@ This project idea stemmed from a Kaggle Competition in 2018. More information ca
 *Currently Instacart uses transactional data to develop models that predict which products a user will buy again, try for the first time, or add to their cart next during a session.*
 
 DISCLAIMER: I am in no way affiliated with Instacart and did not make any Kaggle submissions, since the competition ended a couple years ago.
-
-Project instructions (Metis students only) [here](https://github.com/thisismetis/onl_ds5/blob/main/curriculum/project-03/project-03-introduction/project_03.md).
 
 Download the dataset [here](https://www.kaggle.com/c/instacart-market-basket-analysis/data).
 
