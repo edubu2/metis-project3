@@ -112,12 +112,60 @@ There were 32 features in total. The above are the ones that provided the most i
 ___
 ## Model Selection
 
-___
-## Metric Selection
+I compared results between Logistic Regression, RandomForest, and XGBoost. The tree-based models (RF & XGB) performed much better than standard Logistic Regression. The RandomForest and XGBoost results were very close, but XGBoost had the slight edge in terms of F-1 score.
 
+___
+## Parameter Tuning XGBoost
+
+Before we get into this, I want to note that I ran my grid searches on a 16-vCPU virtual machine, and my initial search took about 28 hours at 1600% CPU utilization, on about 25% of my data. I suggest using a subset closer to 1% of the data unless you're using a high-CPU VM.
+
+The parameter ranges were as follows:
+
+    params = {
+        'learning_rate': [0.001, 0.001, 0.01]
+        'max_depth': [7, 8, 9],
+        'n_estimators': [400, 500],
+        'colsample_bytree': [0.6, 0.7, 0.8],
+        'min_child_weight': [7, 8, 9]}
+
+I then ran it with a few more variations above the above parameters, each time lowering the slope (and subset, due to time constraints).
+
+Here were the final parameters I used for the XGBoostClassifier():
+
+    xgb = XGBClassifier(colsample_bytree=0.8,
+                    min_child_weight=9,
+                    n_estimators=400,
+                    max_depth=7,
+                    learning_rate=0.009,
+                    eval_metric='logloss',
+                    verbosity=3,
+                    use_label_encoder =False)
 ___
 ## Model Evaluation
 
+Let's refer back to our use-case. Specifically, Instacart's "Buy it Again" feature. The feature brings Instacart two benefits:
+1. User ease of use
+2. **Increase product conversion rates**
+
+What does that mean for us, with our goal being number 2? What products should Instacart show their users in the "Buy it Again" section to increase conversion? 
+* Optimize precision: only show the users the products that we're certain they'll purchase
+  * *precision = true positives / all positive predictions*
+* Optimize recall: show orders we're certain they'll purchase (for convenience), but also show items that they are reasonably less-likely to purchase
+  * *recall = true positives / actual positives*
+
+The clear winner is the latter option, to optimize recall. However, the Kaggle competition ranked winners based on their model F-1 scores. F-1 scores perfectly balance precision with recall.
+
+Therefore, here is where we diverge from the Kaggle competition (and hopefully Instacart does the same). We will use an F-beta scoring metric with beta=2. This F-2 score still balances precision and recall, but essentially weights recall 25% higher in the calculation.
+
+[Precision vs Recall curve](etc/pr_good_curve.png)
+
+We also need to set a probability threshold. If our model were a person, this would be the amount of convincing they would need to classify something as a reorder. With a 50% threshold, if the model predicts a 40% probability, it will not be shown to the user. 
+
+So, I tested the results at each threshold to determine that a threshold of 0.12 results in the highest F-2 score. With this, we have our prediction model, and the results are as follows:
+
+**F-2 Score: `0.532034`**
+
+[confusion matrix at 0.12 threshold](etc/cm_optimal_f2_readme.png)
 ___
 ## Data Source
 
